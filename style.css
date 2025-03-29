@@ -18,13 +18,14 @@ h1 {
 }
 
 button {
+    margin: 10px;
     border: none;
     border-radius: 15px;
     padding: 10px;
     cursor: pointer;
     background-color: blue;
     color: white;
-    font-size: 20px;
+    font-size: 17px;
     font-family: Helvetica;
     transition: 0.5s;
 }
@@ -42,7 +43,7 @@ p {
     font-family: Helvetica;
     font-size: 20px;
     margin-top: 20px;
-    color: #0000a7;
+    color: #000000;
     text-align: center;
     position: fixed;
     margin-top: 150px;
