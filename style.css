@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-family: Helvetica;
+    position: fixed;
+    margin-bottom: 150px;
+}
+
+button {
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    font-family: Helvetica;
+    transition: 0.5s;
+}
+
+button:hover {
+    background-color: #0000a7;
+    font-size: 25px;
+}
+
+button:active {
+    font-size: 15px;
+}
