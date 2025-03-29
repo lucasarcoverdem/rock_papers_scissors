@@ -37,3 +37,13 @@ button:hover {
 button:active {
     font-size: 15px;
 }
+
+p {
+    font-family: Helvetica;
+    font-size: 20px;
+    margin-top: 20px;
+    color: #0000a7;
+    text-align: center;
+    position: fixed;
+    margin-top: 150px;
+}

@@ -1,48 +1,53 @@
 const rockButton = document.getElementById('rockButton');
 const paperButton = document.getElementById('paperButton');
 const scissorsButton = document.getElementById('scissorsButton');
+let resultParagraph = document.getElementById('result');
+let computerMove;
+let result;
+
+function pickComputerMove() {
+    const randomNumber = Math.random();
+    if (randomNumber >= 0 && randomNumber < 1 / 3) {
+        computerMove = 'rock';
+    } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+        computerMove = 'paper';
+    } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+        computerMove = 'scissors';
+    }
+}
 
 rockButton.addEventListener('click', function() {
-    let randomNumber = Math.random();
-
-    if(randomNumber >= 0 && randomNumber < 1 / 3) {
-        window.alert('You: Rock | CPU: Rock');
-        window.alert('It is a draw!')
-    } else if(randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-        window.alert('You: Rock | CPU: Paper');
-        window.alert('You lost!');
-    } else if(randomNumber >= 2 / 3 && randomNumber < 1) {
-        window.alert('You: Rock | CPU: Scissors');
-        window.alert('You win!');
+    pickComputerMove();
+    if (computerMove === 'rock') {
+        result = 'Draw!';
+    } else if (computerMove === 'paper') {
+        result = 'Lose!';
+    } else if (computerMove === 'scissors') {
+        result = 'Win!';
     }
+    resultParagraph.innerHTML = `You chose rock. Computer chose ${computerMove}. ${result}`;
 })
 
 paperButton.addEventListener('click', function() {
-    let randomNumber = Math.random();
-
-    if(randomNumber >= 0 && randomNumber < 1 / 3) {
-        window.alert('You: Paper | CPU: Rock');
-        window.alert('You win!')
-    } else if(randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-        window.alert('You: Paper | CPU: Paper');
-        window.alert('It is a draw!');
-    } else if(randomNumber >= 2 / 3 && randomNumber < 1) {
-        window.alert('You: Paper | CPU: Scissors');
-        window.alert('You lost!');
+    pickComputerMove();
+    if (computerMove === 'rock') {
+        result = 'Win!';
+    } else if (computerMove === 'paper') {
+        result = 'Draw!';
+    } else if (computerMove === 'scissors') {
+        result = 'Lose!';
     }
+    resultParagraph.innerHTML = `You chose paper. Computer chose ${computerMove}. ${result}`;
 })
 
 scissorsButton.addEventListener('click', function() {
-    let randomNumber = Math.random();
-
-    if(randomNumber >= 0 && randomNumber < 1 / 3) {
-        window.alert('You: Scissors | CPU: Rock');
-        window.alert('You lost!')
-    } else if(randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-        window.alert('You: Scissors | CPU: Paper');
-        window.alert('You win!');
-    } else if(randomNumber >= 2 / 3 && randomNumber < 1) {
-        window.alert('You: Scissors | CPU: Scissors');
-        window.alert('It is a draw!');
+    pickComputerMove();
+    if (computerMove === 'rock') {
+        result = 'Lose!';
+    } else if (computerMove === 'paper') {
+        result = 'Win!';
+    } else if (computerMove === 'scissors') {
+        result = 'Draw!';
     }
+    resultParagraph.innerHTML = `You chose scissors. Computer chose ${computerMove}. ${result}`;
 })
