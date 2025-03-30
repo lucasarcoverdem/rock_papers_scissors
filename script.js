@@ -2,52 +2,47 @@ const rockButton = document.getElementById('rockButton');
 const paperButton = document.getElementById('paperButton');
 const scissorsButton = document.getElementById('scissorsButton');
 let resultParagraph = document.getElementById('result');
-let computerMove;
 let result;
 
 function pickComputerMove() {
     const randomNumber = Math.random();
     if (randomNumber >= 0 && randomNumber < 1 / 3) {
-        computerMove = 'rock';
+        return 'Rock';
     } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-        computerMove = 'paper';
-    } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
-        computerMove = 'scissors';
+        return 'Paper';
+    } else if (randomNumber >= 2 / 3) {
+        return 'Scissors';
     }
 }
 
-rockButton.addEventListener('click', function() {
-    pickComputerMove();
-    if (computerMove === 'rock') {
-        result = 'Draw!';
-    } else if (computerMove === 'paper') {
-        result = 'Lose!';
-    } else if (computerMove === 'scissors') {
-        result = 'Win!';
-    }
-    resultParagraph.innerHTML = `You chose rock. Computer chose ${computerMove}. ${result}`;
-})
+function playGame(playerMove) {
+    const computerMove = pickComputerMove()
 
-paperButton.addEventListener('click', function() {
-    pickComputerMove();
-    if (computerMove === 'rock') {
-        result = 'Win!';
-    } else if (computerMove === 'paper') {
-        result = 'Draw!';
-    } else if (computerMove === 'scissors') {
-        result = 'Lose!';
+    if (playerMove === computerMove) {
+        result = 'Draw';
+    } else if (playerMove === 'Rock') {
+        if (computerMove === 'Paper') {
+            result = 'Defeat';
+        } else if (computerMove === 'Scissors') {
+            result = 'Win';
+        }
+    } else if (playerMove === 'Paper') {
+        if (computerMove === 'Rock') {
+            result = 'Win';
+        } else if (computerMove === 'Scissors') {
+            result = 'Defeat';
+        }
+    } else if (playerMove === 'Scissors') {
+        if (computerMove === 'Rock') {
+            result = 'Defeat';
+        } else if (computerMove === 'Paper') {
+            result = 'Win';
+        }
     }
-    resultParagraph.innerHTML = `You chose paper. Computer chose ${computerMove}. ${result}`;
-})
 
-scissorsButton.addEventListener('click', function() {
-    pickComputerMove();
-    if (computerMove === 'rock') {
-        result = 'Lose!';
-    } else if (computerMove === 'paper') {
-        result = 'Win!';
-    } else if (computerMove === 'scissors') {
-        result = 'Draw!';
-    }
-    resultParagraph.innerHTML = `You chose scissors. Computer chose ${computerMove}. ${result}`;
-})
+    resultParagraph.innerHTML = `You: ${playerMove} | CPU: ${computerMove} | ${result} `
+}
+
+rockButton.onclick = () => playGame('Rock');
+paperButton.onclick = () => playGame('Paper');
+scissorsButton.onclick = () => playGame('Scissors');
