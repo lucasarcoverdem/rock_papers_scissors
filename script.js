@@ -1,8 +1,16 @@
 const rockButton = document.getElementById('rockButton');
 const paperButton = document.getElementById('paperButton');
 const scissorsButton = document.getElementById('scissorsButton');
+const resetScoreBtn = document.getElementById('resetScoreBtn');
+let scoreP = document.getElementById('scoreP');
 let resultParagraph = document.getElementById('result');
 let result;
+
+const score = {
+    win: 0,
+    defeat: 0,
+    tie: 0
+};
 
 function pickComputerMove() {
     const randomNumber = Math.random();
@@ -19,30 +27,45 @@ function playGame(playerMove) {
     const computerMove = pickComputerMove()
 
     if (playerMove === computerMove) {
-        result = 'Draw';
+        result = 'Tie';
+        score.tie++;
     } else if (playerMove === 'Rock') {
         if (computerMove === 'Paper') {
             result = 'Defeat';
+            score.defeat++;
         } else if (computerMove === 'Scissors') {
             result = 'Win';
+            score.win++;
         }
     } else if (playerMove === 'Paper') {
         if (computerMove === 'Rock') {
             result = 'Win';
+            score.win++;
         } else if (computerMove === 'Scissors') {
             result = 'Defeat';
+            score.defeat++;
         }
     } else if (playerMove === 'Scissors') {
         if (computerMove === 'Rock') {
             result = 'Defeat';
+            score.defeat++;
         } else if (computerMove === 'Paper') {
             result = 'Win';
+            score.win++;
         }
     }
 
     resultParagraph.innerHTML = `You: ${playerMove} | CPU: ${computerMove} | ${result} `
+    scoreP.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`
 }
 
 rockButton.onclick = () => playGame('Rock');
 paperButton.onclick = () => playGame('Paper');
 scissorsButton.onclick = () => playGame('Scissors');
+resetScoreBtn.onclick = () => {
+    score.win = 0;
+    score.defeat = 0;
+    score.tie = 0;
+    scoreP.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`
+    resultParagraph.innerHTML = 'Choose your move!'
+}
