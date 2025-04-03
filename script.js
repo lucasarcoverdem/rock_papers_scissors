@@ -2,15 +2,15 @@ const rockButton = document.getElementById('rockButton');
 const paperButton = document.getElementById('paperButton');
 const scissorsButton = document.getElementById('scissorsButton');
 const resetScoreBtn = document.getElementById('resetScoreBtn');
-let scoreP = document.getElementById('scoreP');
+let scoreParagraph = document.getElementById('scoreParagraph');
 let resultParagraph = document.getElementById('result');
 let result;
 
-const score = {
+let score = JSON.parse(localStorage.getItem('score')) || {
     win: 0,
     defeat: 0,
     tie: 0
-};
+}
 
 function pickComputerMove() {
     const randomNumber = Math.random();
@@ -55,8 +55,10 @@ function playGame(playerMove) {
         }
     }
 
+    localStorage.setItem('score', JSON.stringify(score));
+
     resultParagraph.innerHTML = `You: ${playerMove} | CPU: ${computerMove} | ${result} `
-    scoreP.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`
+    scoreParagraph.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`
 }
 
 rockButton.onclick = () => playGame('Rock');
@@ -66,6 +68,7 @@ resetScoreBtn.onclick = () => {
     score.win = 0;
     score.defeat = 0;
     score.tie = 0;
-    scoreP.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`
+    localStorage.removeItem('score');
+    scoreParagraph.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`
     resultParagraph.innerHTML = 'Choose your move!'
 }

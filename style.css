@@ -49,7 +49,7 @@ p {
     font-size: 15px;
 }
 
-#scoreP {
+#scoreParagraph {
     position: fixed;
     margin-top: 600px;
 }
