@@ -2,15 +2,17 @@ const rockButton = document.getElementById('js-rock-button');
 const paperButton = document.getElementById('js-paper-button');
 const scissorsButton = document.getElementById('js-scissors-button');
 const resetScoreBtn = document.getElementById('js-reset-score');
-const scoreParagraph = document.getElementById('js-score');
+const chosenMoves = document.getElementById('js-chosen-moves');
 const resultParagraph = document.getElementById('js-result');
+const scoreParagraph = document.getElementById('js-score');
+
 let result;
 
-let score = JSON.parse(localStorage.getItem('score')) || {
+let score = {
     win: 0,
     defeat: 0,
-    tie: 0
-};
+    tie: 0,
+}
 
 function pickComputerMove() {
     const randomNumber = Math.random();
@@ -21,6 +23,12 @@ function pickComputerMove() {
     } else {
         return 'Scissors';
     }
+}
+
+function getEmoji(playerMove) {
+    if (playerMove === 'Rock') return '✊';
+    if (playerMove === 'Paper') return '✋';
+    if (playerMove === 'Scissors') return '✌️';
 }
 
 function playGame(playerMove) {
@@ -41,10 +49,11 @@ function playGame(playerMove) {
         score.defeat++;
     }
 
-    localStorage.setItem('score', JSON.stringify(score));
-
-    resultParagraph.innerHTML = `You: ${playerMove} | CPU: ${computerMove} | ${result}`;
-    scoreParagraph.innerHTML = `Wins: ${score.win} | Defeats: ${score.defeat} | Ties: ${score.tie}`;
+    const playerMoveEmoji = getEmoji(playerMove);
+    const computerMoveEmoji = getEmoji(computerMove);
+    chosenMoves.innerText = `You: ${playerMoveEmoji} CPU: ${computerMoveEmoji}`;
+    resultParagraph.innerText = `It is a ${result}!`;
+    scoreParagraph.innerText = `${score.win} wins ${score.defeat} defeats ${score.tie} ties`;
 }
 
 rockButton.onclick = () => playGame('Rock');
@@ -53,7 +62,7 @@ scissorsButton.onclick = () => playGame('Scissors');
 
 resetScoreBtn.onclick = () => {
     score = { win: 0, defeat: 0, tie: 0 };
-    localStorage.removeItem('score');
-    scoreParagraph.innerHTML = `Wins: 0 | Defeats: 0 | Ties: 0`;
-    resultParagraph.innerHTML = 'Choose your move!';
+    chosenMoves.innerText = '';
+    resultParagraph.innerText = '';
+    scoreParagraph.innerText = '0 wins 0 defeats 0 ties';
 };
