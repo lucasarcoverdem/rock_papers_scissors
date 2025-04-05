@@ -5,9 +5,10 @@ const resetScoreBtn = document.getElementById('js-reset-score');
 const chosenMoves = document.getElementById('js-chosen-moves');
 const resultParagraph = document.getElementById('js-result');
 const scoreParagraph = document.getElementById('js-score');
+const autoplayButton = document.getElementById('js-autoplay');
 
 let result;
-
+let isAutoplaying = false;
 let score = {
     win: 0,
     defeat: 0,
@@ -22,6 +23,14 @@ function pickComputerMove() {
         return 'Paper';
     } else {
         return 'Scissors';
+    }
+}
+
+function autoplay() {
+    if (isAutoplaying) {
+        playerMove = pickComputerMove();
+        playGame(playerMove);
+        setTimeout(autoplay, 1500);
     }
 }
 
@@ -59,10 +68,19 @@ function playGame(playerMove) {
 rockButton.onclick = () => playGame('Rock');
 paperButton.onclick = () => playGame('Paper');
 scissorsButton.onclick = () => playGame('Scissors');
-
 resetScoreBtn.onclick = () => {
     score = { win: 0, defeat: 0, tie: 0 };
     chosenMoves.innerText = '';
     resultParagraph.innerText = '';
     scoreParagraph.innerText = '0 wins 0 defeats 0 ties';
+};
+autoplayButton.onclick = () => {
+    if (isAutoplaying === false) {
+        isAutoplaying = true;
+    } else {
+        isAutoplaying = false;
+    }
+
+    autoplay();
+    
 };

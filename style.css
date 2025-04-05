@@ -56,7 +56,7 @@ h1 {
     right: 25px;
     top: 700px;
     cursor: pointer;
-    transition: 0.75s linear;
+    transition: 0.3s linear;
 }
 
 #js-reset-score:hover {
@@ -77,4 +77,24 @@ h1 {
 #js-chosen-moves {
     position: fixed;
     top: 500px;
+}
+
+#js-autoplay {
+    position: fixed;
+    top: 670px;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#js-autoplay:hover {
+    background-color: #00009b;
+}
+
+#js-autoplay:active {
+    background-color: #0303e5;
 }
